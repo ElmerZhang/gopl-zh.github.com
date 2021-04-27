@@ -1,0 +1,34 @@
+name: Build master
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  Build-And-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Setup gitbook-cli
+        run: npm install -g gitbook-cli
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup gitbook
+        run: gitbook install
+      - name: Build HTML
+        uses: make
+      - name: upload files to OSS
+        uses: fangbinwei/aliyun-oss-website-action@v1
+        with:
+          accessKeyId: ${{ secrets.ACCESS_AK_ID }}
+          accessKeySecret: ${{ secrets.ACCESS_AK_SECRET }}
+          bucket: ${{ secrets.ALIYUN_OSS_BUCKET_NAME }}
+          endpoint: oss-${{ secrets.ALIYUN_OSS_REGION }}.aliyuncs.com
+          folder: _book
+          exclude: |
+            *.go
+            *.bat
+            *.md
+            .gitignore
