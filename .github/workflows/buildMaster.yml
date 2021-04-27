@@ -18,7 +18,7 @@ jobs:
       - name: Setup gitbook
         run: gitbook install
       - name: Build HTML
-        uses: make
+        run: make
       - name: upload files to OSS
         uses: fangbinwei/aliyun-oss-website-action@v1
         with:
