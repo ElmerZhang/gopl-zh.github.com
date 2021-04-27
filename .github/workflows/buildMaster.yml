@@ -22,8 +22,8 @@ jobs:
       - name: upload files to OSS
         uses: fangbinwei/aliyun-oss-website-action@v1
         with:
-          accessKeyId: ${{ secrets.ACCESS_AK_ID }}
-          accessKeySecret: ${{ secrets.ACCESS_AK_SECRET }}
+          accessKeyId: ${{ secrets.ALIYUN_AK_ID }}
+          accessKeySecret: ${{ secrets.ALIYUN_AK_SECRET }}
           bucket: ${{ secrets.ALIYUN_OSS_BUCKET_NAME }}
           endpoint: oss-${{ secrets.ALIYUN_OSS_REGION }}.aliyuncs.com
           folder: _book
